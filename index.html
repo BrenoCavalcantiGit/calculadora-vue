@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Vue</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div id="app" class="calculadora">
+        <h1>Calculadora</h1>
+        <p class="subtitulo">Feita com Vue.js. O resultado aparece sozinho.</p>
+
+        <div class="campos">
+            <input type="number" v-model.number="numero1" placeholder="Primeiro número">
+
+            <select v-model="operacao">
+                <option v-for="item in operacoes" :key="item.valor" :value="item.valor">
+                    {{ item.simbolo }} {{ item.nome }}
+                </option>
+            </select>
+
+            <input type="number" v-model.number="numero2" placeholder="Segundo número">
+        </div>
+
+        <!-- Renderização condicional -->
+        <p v-if="erro" class="erro">{{ erro }}</p>
+        <card-resultado
+            v-else-if="resultado !== null"
+            titulo="Resultado"
+            :valor="resultado"
+            :negativo="resultado < 0">
+        </card-resultado>
+        <p v-else class="dica">Digite os dois números para ver o resultado.</p>
+    </div>
+
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.js"></script>
+    <script src="./js/app.js"></script>
+</body>
+</html>
